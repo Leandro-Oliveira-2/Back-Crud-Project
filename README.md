@@ -13,3 +13,7 @@ Antes de começar, certifique-se de ter as seguintes ferramentas instaladas em s
 ## Instalação
 
 1. Clone este repositório (ou faça o download do código-fonte):
+
+2. Instale as depedências usando o "Npm Install"
+
+3. Execute o arquivo usando ""
