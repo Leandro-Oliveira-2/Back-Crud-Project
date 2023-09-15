@@ -5,10 +5,11 @@ const transationRouter = Router();
 const transationController = new TransationController();
 
 transationRouter.post('/', transationController.create);
-transationRouter.get('/:id', transationController.find);
 transationRouter.delete('/:id', transationController.delete);
 transationRouter.get('/', transationController.list);
-
+transationRouter.post('/deposit', transationController.deposit);
+transationRouter.post('/saque', transationController.saque);
+transationRouter.get('/list/:id', transationController.userTransations)
 
 
 export default transationRouter;

@@ -15,18 +15,18 @@ interface IRequest {
 }
 
 @injectable()
-class FindUserService{
+class FindUserService {
 
     @inject(Types.UserRepository) private userRepository!: IUserRepository;
-  
-    public async execute({id}: IRequest){
 
-    const user = await this.userRepository.find({id});
-    if(!user){
-        throw new AppError("Could not find user", 404);
-    }
+    public async execute({ id }: IRequest) {
+
+        const user = await this.userRepository.find({ id });
+        if (!user) {
+            throw new AppError("Could not find user", 404);
+        }
         return user;
-  }
+    }
 }
 
 export default FindUserService;

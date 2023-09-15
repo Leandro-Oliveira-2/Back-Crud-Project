@@ -14,7 +14,7 @@ class User {
   @Column({ type: 'varchar', name: 'gender', length: 10})
   gender?: string;
 
-  @Column({ type: 'varchar', name: 'email', length: 64})
+  @Column({ type: 'varchar', name: 'email', length: 64, unique: true})
   email?: string;
 
   @Column({ type: 'varchar', name: 'adress', length: 128})
@@ -23,7 +23,6 @@ class User {
   @Column({ type: 'varchar', name: 'phone', length: 15})
   phone?: string; 
 
-  @Exclude()
   @Column({ type: 'varchar', name: 'passwordHash', length: 1024 })
   passwordHash?: string;
 

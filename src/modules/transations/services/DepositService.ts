@@ -1,7 +1,6 @@
 import Types from "@common/container/types";
 import { inject, injectable } from "inversify";
 import * as Z from 'zod';
-import * as argon2 from 'argon2';
 
 import Schema from '@modules/transations/infra/http/validators/CreateTransationValidators';
 import ITransationRepository from '@modules/transations/repositories/ITransationRepository';
@@ -10,14 +9,13 @@ import ITransationRepository from '@modules/transations/repositories/ITransation
 import AppError from "@common/errors/AppError";
 import { StatusCodes } from "http-status-codes";
 import IUserRepository from "@modules/user/repositories/IUserRepository";
-import app from "@common/infra/http/app";
 
 interface IRequest {
   data: Z.infer<typeof Schema>,
 }
 
 @injectable()
-class CreateTransationService {
+class DepositService {
 
   @inject(Types.UserRepository) private userRepository!: IUserRepository;
 
@@ -57,9 +55,10 @@ class CreateTransationService {
     return {
       id: transationCreated.id,
       type: transationCreated.transationType,
-      valeu: transationCreated.value
+      value: transationCreated.value,
+      saldoAtual: user.saldo
     };
   }
 }
 
-export default CreateTransationService;
+export default DepositService;

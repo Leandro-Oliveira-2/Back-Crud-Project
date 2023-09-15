@@ -15,7 +15,7 @@ class TransationRepository implements ITransationRepository {
     const transation = this.ormRepository.create(data);
     return this.ormRepository.save(transation);
   }
-  
+
   public async find(where: object | object[], relations?: string[]): Promise<Transations | undefined> {
     return this.ormRepository.findOne({ where, relations });
   }

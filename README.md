@@ -16,4 +16,5 @@ Antes de começar, certifique-se de ter as seguintes ferramentas instaladas em s
 
 2. Instale as depedências usando o "Npm Install"
 
-3. Execute o arquivo usando ""
+3. Execute o arquivo usando "npm run run:dev"
+

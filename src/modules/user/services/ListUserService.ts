@@ -8,14 +8,14 @@ import IResponse from '@modules/user/responses/IListUserResponse'
 
 
 @injectable()
-class ListUserService{
+class ListUserService {
 
-   @inject(Types.UserRepository) private userRepository!: IUserRepository;
-  
-    public async execute(): Promise<IResponse[] | undefined>{
-      const users = await this.userRepository.list({});
-      
-      return users
+  @inject(Types.UserRepository) private userRepository!: IUserRepository;
+
+  public async execute(): Promise<IResponse[] | undefined> {
+    const users = await this.userRepository.list({});
+
+    return users
   }
 }
 

@@ -44,6 +44,10 @@ class LoginService {
         id: user.id,
         fullname: user.name,
         email: user.email,
+        saldo: user.saldo,
+        gender: user.gender,
+        phone: user.phone,
+        adress: user.adress
       },
     };
   }

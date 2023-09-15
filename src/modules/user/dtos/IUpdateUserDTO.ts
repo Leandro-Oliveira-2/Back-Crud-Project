@@ -4,8 +4,7 @@ interface IUpdateUserDTO {
   email?: string;
   phone?: string;
   adress?: string;
-  passwordHash?: string;
-  saldo?: number;
+  saldo?: number
 }
 
 export default IUpdateUserDTO;

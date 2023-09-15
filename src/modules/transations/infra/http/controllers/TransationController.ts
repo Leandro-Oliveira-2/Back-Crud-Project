@@ -1,50 +1,80 @@
 import { Request, Response } from "express";
-
 import { StatusCodes } from "http-status-codes";
 import AppError from "@common/errors/AppError";
 import parseZodValidationError from "@common/errors/ZodError";
 import AppContainer from '@common/container';
 
 import CreateTransationValidator from '@modules/transations/infra/http/validators/CreateTransationValidators'
-
 import CreateTransationService from "@modules/transations/services/CreateTransationService";
-import FindUserService from "@modules/user/services/FindUserService";
 import DeleteUserService from "@modules/user/services/DeleteUserService";
-import ListUserService from "@modules/user/services/ListUserService";
+import DepositService from "@modules/transations/services/DepositService";
+import WithdrawMoneyService from "@modules/transations/services/WithdrawMoneyService";
+import ListTransationService from "@modules/transations/services/ListTransationService";
+import GetTransactionsUserService from "@modules/transations/services/GetTransactionsUserService";
 
 
 class TransationController {
 
-  public async create(req:Request, res:Response): Promise<Response> {
-    const data = await CreateTransationValidator.parseAsync(req.body).catch((err)=>{
+  public async create(req: Request, res: Response): Promise<Response> {
+    const data = await CreateTransationValidator.parseAsync(req.body).catch((err) => {
       throw new AppError(parseZodValidationError(err), StatusCodes.BAD_REQUEST);
     });
     console.log("transactiontype:", data.transationType);
     const createTransation = AppContainer.resolve<CreateTransationService>(CreateTransationService);
-    const transation = await createTransation.execute({data});
+    const transation = await createTransation.execute({ data });
 
     return res.status(StatusCodes.CREATED).json(transation)
   }
 
-  public async delete(req:Request, res: Response): Promise<Response> {
+  public async deposit(req: Request, res: Response): Promise<Response> {
+    const data = await CreateTransationValidator.parseAsync(req.body).catch((err) => {
+      throw new AppError(parseZodValidationError(err), StatusCodes.BAD_REQUEST);
+    });
+    console.log("transactiontype:", data.transationType);
+    const createTransation = AppContainer.resolve<DepositService>(DepositService);
+    const transation = await createTransation.execute({ data });
+
+    return res.status(StatusCodes.CREATED).json(transation)
+  }
+
+  public async saque(req: Request, res: Response): Promise<Response> {
+    const data = await CreateTransationValidator.parseAsync(req.body).catch((err) => {
+      throw new AppError(parseZodValidationError(err), StatusCodes.BAD_REQUEST);
+    });
+    console.log("transactiontype:", data.transationType);
+    const createTransation = AppContainer.resolve<WithdrawMoneyService>(WithdrawMoneyService);
+    const transation = await createTransation.execute({ data });
+
+    return res.status(StatusCodes.CREATED).json(transation)
+  }
+
+  public async delete(req: Request, res: Response): Promise<Response> {
     const id = +req.params.id;
     const deleteUser = AppContainer.resolve<DeleteUserService>(DeleteUserService);
     await deleteUser.execute(id)
     return res.status(StatusCodes.NO_CONTENT).json();
   }
 
-  public async find(req:Request, res: Response): Promise<Response> {
+
+public async userTransations(req: Request, res: Response): Promise<Response> {
+  try {
     const id = +req.params.id;
-    const findUser = AppContainer.resolve<FindUserService>(FindUserService);
-    const user = await findUser.execute({id})
+    console.log(id)
+    const findUser = AppContainer.resolve<GetTransactionsUserService>(GetTransactionsUserService);
+    const user = await findUser.execute({ id })
+    console.log(user)
     return res.status(200).json(user);
+  } catch (error) {
+    return res.status(500).json({ message: 'Internal Server Error' });
   }
+}
 
-  public async list(req:Request, res:Response): Promise<Response> {
-    const listUser = AppContainer.resolve<ListUserService>(ListUserService);
-    const users = await listUser.execute();
 
-    return res.status(200).json(users);
+  public async list(req: Request, res: Response): Promise<Response> {
+    const listTransatio = AppContainer.resolve<ListTransationService>(ListTransationService);
+    const transations = await listTransatio.execute();
+
+    return res.status(200).json(transations);
   }
 
 }

@@ -4,29 +4,29 @@ import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "t
 @Entity('transations')
 class Transations {
 
-    @PrimaryGeneratedColumn({ type: 'smallint', name: 'id'})
+    @PrimaryGeneratedColumn({ type: 'smallint', name: 'id' })
     id?: number;
 
-    @Column({ type: 'int', name :'userId'})
+    @Column({ type: 'int', name: 'userId' })
     userId?: number;
 
-    @Column({ type: 'timestamptz', name :'date'})
+    @Column({ type: 'timestamptz', name: 'date' })
     date?: Date;
 
-    @Column({ type: 'varchar', name :'transationType', length: 64})
+    @Column({ type: 'varchar', name: 'transationType', length: 64 })
     transationType?: string;
 
-    @Column({ type: 'varchar', name :'description', length: 128})
+    @Column({ type: 'varchar', name: 'description', length: 128 })
     description?: string;
 
-    @Column({ type: 'int', name :'value'})
+    @Column({ type: 'float', name: 'value' })
     value?: number;
 
-    @Column({ type: 'varchar', name: 'status', length: 64})
+    @Column({ type: 'varchar', name: 'status', length: 64 })
     status?: string;
 
     @ManyToOne(() => User, (user) => user.transations)
     @JoinColumn([{ name: 'userId', referencedColumnName: 'id' }])
-    user?: User; 
+    user?: User;
 }
 export default Transations

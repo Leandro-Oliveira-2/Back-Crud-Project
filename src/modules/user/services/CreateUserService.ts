@@ -11,23 +11,23 @@ import AppError from "@common/errors/AppError";
 import { StatusCodes } from "http-status-codes";
 
 interface IRequest {
-    data: Z.infer<typeof Schema>
+  data: Z.infer<typeof Schema>
 }
 
 @injectable()
-class CreateUserService{
+class CreateUserService {
 
   @inject(Types.UserRepository) private userRepository!: IUserRepository;
-  
-  public async execute({data}: IRequest){
+
+  public async execute({ data }: IRequest) {
     const user = {
-        name: data.name,
-        gender: data.gender.toString(),
-        email: data.email,
-        phone: data.phone,
-        adress: data.adress,
-        saldo: data.saldo,
-        passwordHash: await argon2.hash(data.secret)
+      name: data.name,
+      gender: data.gender.toString(),
+      email: data.email,
+      phone: data.phone,
+      adress: data.adress,
+      saldo: data.saldo,
+      passwordHash: await argon2.hash(data.secret)
     }
     console.log(user)
 

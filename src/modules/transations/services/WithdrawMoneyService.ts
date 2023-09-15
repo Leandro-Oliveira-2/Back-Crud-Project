@@ -17,7 +17,7 @@ interface IRequest {
 }
 
 @injectable()
-class CreateTransationService {
+class WithdrawMoneyService {
 
   @inject(Types.UserRepository) private userRepository!: IUserRepository;
 
@@ -34,22 +34,23 @@ class CreateTransationService {
       throw new AppError("User not found", StatusCodes.NOT_FOUND);
     }
 
+    if (user.saldo !== undefined && user.saldo < data.value) {
+      throw new AppError("Value is Insufficient", StatusCodes.FORBIDDEN)
+    }
 
-    const novoSaldo = (user.saldo || 0) + data.value;
-    console.log(data.value);
-    if (novoSaldo < 0) {
-      throw new AppError("Value is Insuficient", StatusCodes.FORBIDDEN)
-    }
+
+
     const userAlter = {
-      saldo: novoSaldo
+      saldo: user.saldo !== undefined ? user.saldo - data.value : 0
     }
+
     await this.userRepository.update(user, userAlter);
     const transation = {
       userId: data.userId,
       date: transationDate,
       transationType: data.transationType,
       description: data.description,
-      value: data.value,
+      value: parseFloat(data.value.toString()), // Convertendo para número decimal
       status: "CONCLUÍDO"
     }
     const transationCreated = await this.transationRepository.create(transation);
@@ -57,9 +58,10 @@ class CreateTransationService {
     return {
       id: transationCreated.id,
       type: transationCreated.transationType,
-      valeu: transationCreated.value
+      value: transationCreated.value,
+      saldoAtual: user.saldo
     };
   }
 }
 
-export default CreateTransationService;
+export default WithdrawMoneyService;
