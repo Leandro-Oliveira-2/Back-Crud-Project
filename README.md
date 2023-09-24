@@ -1,20 +1,54 @@
-# CRUD de Usuários com Node.js, TypeORM e Express
+# Projeto CRUD de Usuário com Entidade de Transação
 
-Este é um projeto de exemplo de um CRUD de usuários desenvolvido em Node.js, utilizando o TypeORM para interagir com um banco de dados e o Express para criar as rotas da API.
+Este projeto é um sistema CRUD (Criar, Ler, Atualizar e Deletar) de usuários com a capacidade de realizar transações (saque e depósito) utilizando um atributo associado ao usuário. O projeto é desenvolvido utilizando o TypeORM, um ORM (Object-Relational Mapping) para Node.js e TypeScript.
 
-## Pré-requisitos
+## Tecnologias Utilizadas
 
-Antes de começar, certifique-se de ter as seguintes ferramentas instaladas em seu sistema:
+- Node.js
+- TypeScript
+- TypeORM
+- PostgreSQL (ou outro banco de dados de sua escolha)
 
-- [Node.js](https://nodejs.org/) (versão 14 ou superior)
-- [npm](https://www.npmjs.com/) (normalmente é instalado automaticamente com o Node.js)
-- [Git](https://git-scm.com/) (opcional, caso queira clonar o repositório)
+## Estrutura do Projeto
 
-## Instalação
+## Configuração do Projeto
 
-1. Clone este repositório (ou faça o download do código-fonte):
+1. Clone o repositório para o seu ambiente local:
 
-2. Instale as depedências usando o "Npm Install"
+bash
+git clone https://github.com/Leandro-Oliveira-2/Back-Crud-Project.git
 
-3. Execute o arquivo usando "npm run run:dev"
+2. Navegue até o diretório do projeto:
+- cd nome-do-repositorio
 
+3. Instale as dependências:
+- npm install
+
+## Executando o Projeto
+- Para iniciar o projeto, utilize o comando: 
+   npm run run:dev 
+
+O aplicativo será iniciado e estará acessível em http://localhost:8081.
+
+### Funcionalidades
+
+## Listagem de Usuários
+- A página inicial exibe uma tabela com os detalhes de todos os usuários cadastrados. Você pode ver informações como ID, Nome, Email, etc.
+
+## Adicionar Novo Usuário
+Há uma opção para adicionar um novo usuário. Clique no botão "Adicionar Usuário" e preencha os campos necessários.
+
+## Atualizar Usuário
+Cada linha da tabela possui um botão "Editar". Ao clicar nele, você será redirecionado para a página de edição do usuário correspondente.
+
+## Excluir Usuário
+Ao lado do botão "Editar", há um botão de "Excluir". Clicando nele, o usuário será removido do sistema após confirmação.
+
+## Transações
+O sistema permite a realização de transações de saque e depósito para os usuários. Cada transação possui um ID, Tipo de Transação (Saque ou Depósito), Descrição, Valor e Status.
+
+## Visualizar Transações do Usuário
+Ao editar um usuário, existe uma opção para visualizar todas as transações associadas a esse usuário. A tabela exibe o ID da Transação, Data, Tipo, Descrição, Valor e Status.
+
+## Adicionar Transação
+É possível adicionar uma nova transação para um usuário específico. Na página de visualização de transações, clique no botão "Adicionar Transação" e preencha os detalhes necessários.

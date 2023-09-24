@@ -7,9 +7,6 @@ import Schema from '@modules/user/infra/http/validators/CreateUserValidator';
 import IUserRepository from "../repositories/IUserRepository";
 
 
-import AppError from "@common/errors/AppError";
-import { StatusCodes } from "http-status-codes";
-
 interface IRequest {
   data: Z.infer<typeof Schema>
 }
@@ -29,8 +26,6 @@ class CreateUserService {
       saldo: data.saldo,
       passwordHash: await argon2.hash(data.secret)
     }
-    console.log(user)
-
     const userCreated = await this.userRepository.create(user);
 
     return userCreated;

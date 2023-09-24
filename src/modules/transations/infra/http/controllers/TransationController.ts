@@ -16,6 +16,10 @@ import GetTransactionsUserService from "@modules/transations/services/GetTransac
 class TransationController {
 
   public async create(req: Request, res: Response): Promise<Response> {
+    if (!req.auth.id) {
+      throw new AppError("Not have Permission", 403);
+    }
+
     const data = await CreateTransationValidator.parseAsync(req.body).catch((err) => {
       throw new AppError(parseZodValidationError(err), StatusCodes.BAD_REQUEST);
     });
@@ -27,6 +31,10 @@ class TransationController {
   }
 
   public async deposit(req: Request, res: Response): Promise<Response> {
+    if(!req.auth.id){
+      throw new AppError("Not have Permission", 403);
+    }
+
     const data = await CreateTransationValidator.parseAsync(req.body).catch((err) => {
       throw new AppError(parseZodValidationError(err), StatusCodes.BAD_REQUEST);
     });
@@ -38,6 +46,10 @@ class TransationController {
   }
 
   public async saque(req: Request, res: Response): Promise<Response> {
+    if(!req.auth.id){
+      throw new AppError("Not have Permission", 403);
+    }
+
     const data = await CreateTransationValidator.parseAsync(req.body).catch((err) => {
       throw new AppError(parseZodValidationError(err), StatusCodes.BAD_REQUEST);
     });
@@ -49,6 +61,10 @@ class TransationController {
   }
 
   public async delete(req: Request, res: Response): Promise<Response> {
+    if(!req.auth.id){
+      throw new AppError("Not have Permission", 403);
+    }
+
     const id = +req.params.id;
     const deleteUser = AppContainer.resolve<DeleteUserService>(DeleteUserService);
     await deleteUser.execute(id)
@@ -56,26 +72,34 @@ class TransationController {
   }
 
 
-public async userTransations(req: Request, res: Response): Promise<Response> {
-  try {
-    const id = +req.params.id;
-    console.log(id)
-    const findUser = AppContainer.resolve<GetTransactionsUserService>(GetTransactionsUserService);
-    const user = await findUser.execute({ id })
-    console.log(user)
-    return res.status(200).json(user);
-  } catch (error) {
-    return res.status(500).json({ message: 'Internal Server Error' });
+  public async userTransations(req: Request, res: Response): Promise<Response> {
+    if(!req.auth.id){
+      throw new AppError("Not have Permission", 403);
+    }
+
+    try {
+      const id = +req.params.id;
+      const findUser = AppContainer.resolve<GetTransactionsUserService>(GetTransactionsUserService);
+      const user = await findUser.execute({ id })
+      return res.status(200).json(user);
+    } catch (error) {
+      return res.status(500).json({ message: 'Internal Server Error' });
+    }
   }
-}
 
 
   public async list(req: Request, res: Response): Promise<Response> {
+    if(!req.auth.id){
+      throw new AppError("Not have Permission", 403);
+    }
+    
     const listTransatio = AppContainer.resolve<ListTransationService>(ListTransationService);
     const transations = await listTransatio.execute();
 
     return res.status(200).json(transations);
   }
+
+
 
 }
 

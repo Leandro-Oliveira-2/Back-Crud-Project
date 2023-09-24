@@ -29,6 +29,9 @@ class UserController {
   }
 
   public async delete(req: Request, res: Response): Promise<Response> {
+    if (!req.auth.id) {
+      throw new AppError("Not have Permission", 403);
+    }
     const id = +req.params.id;
     const deleteUser = AppContainer.resolve<DeleteUserService>(DeleteUserService);
     await deleteUser.execute(id)
@@ -36,6 +39,9 @@ class UserController {
   }
 
   public async find(req: Request, res: Response): Promise<Response> {
+    if (!req.auth.id) {
+      throw new AppError("Not have Permission", 403);
+    }
     const id = +req.params.id;
     const findUser = AppContainer.resolve<FindUserService>(FindUserService);
     const user = await findUser.execute({ id })
@@ -43,6 +49,9 @@ class UserController {
   }
 
   public async list(req: Request, res: Response): Promise<Response> {
+    if (!req.auth.id) {
+      throw new AppError("Not have Permission", 403);
+    }
     const listUser = AppContainer.resolve<ListUserService>(ListUserService);
     const users = await listUser.execute();
 
@@ -50,6 +59,9 @@ class UserController {
   }
 
   public async update(req: Request, res: Response): Promise<Response> {
+    if (!req.auth.id) {
+      throw new AppError("Not have Permission", 403);
+    }
     const data = await UpdateUserValidator.parseAsync(req.body).catch((err) => {
       throw new AppError(parseZodValidationError(err), StatusCodes.BAD_REQUEST);
     });

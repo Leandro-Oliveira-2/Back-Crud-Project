@@ -3,6 +3,7 @@ import DatabaseConfig from '@config/DataBaseConfig';
 
 import User from '@modules/user/infra/typeorm/entities/User';
 import Transations from '@modules/transations/infra/typeorm/entities/Transations'
+import databaseConfig from '@config/DataBaseConfig';
 
 
 createConnection({
@@ -27,5 +28,10 @@ createConnection({
 }).then(() => {
   console.log('Database connected sucessfully');
 }).catch((error) => {
+  console.log("oiiii")
+  console.log(databaseConfig.host)
+  console.log(databaseConfig.password)
+  console.log(databaseConfig.database)
+  console.log("tchauuuuu")
   console.log(`Could not connect to database with erro: ${error}`);
 });
