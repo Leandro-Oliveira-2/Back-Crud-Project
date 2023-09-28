@@ -31,6 +31,11 @@ class UserRepository implements IUserRepository {
     return this.ormRepository.save(user);
   }
 
+  filterByName(name: String): Promise<User[]>{
+    return this.ormRepository.createQueryBuilder('user')
+      .where('user.name LIKE :name', { name: `%${name}%` })
+      .getMany();
+  }
 
   public async delete(userId: number): Promise<void> {
     this.ormRepository.delete(userId);

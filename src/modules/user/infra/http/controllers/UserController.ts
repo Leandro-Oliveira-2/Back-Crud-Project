@@ -8,12 +8,14 @@ import AppContainer from '@common/container';
 
 import CreateUserValidator from '@modules/user/infra/http/validators/CreateUserValidator'
 import UpdateUserValidator from '@modules/user/infra/http/validators/UpdateUserValidator'
+import FilterUserValidator from '@modules/user/infra/http/validators/FilterUserValidator'
 
 import CreateUserService from "@modules/user/services/CreateUserService";
 import FindUserService from "@modules/user/services/FindUserService";
 import DeleteUserService from "@modules/user/services/DeleteUserService";
 import ListUserService from "@modules/user/services/ListUserService";
 import UpdateUserService from "@modules/user/services/UpdateUserService";
+import FilterUserService from "@modules/user/services/FilterUserService";
 
 
 class UserController {
@@ -39,6 +41,7 @@ class UserController {
   }
 
   public async find(req: Request, res: Response): Promise<Response> {
+
     if (!req.auth.id) {
       throw new AppError("Not have Permission", 403);
     }
@@ -46,6 +49,18 @@ class UserController {
     const findUser = AppContainer.resolve<FindUserService>(FindUserService);
     const user = await findUser.execute({ id })
     return res.status(200).json(instanceToPlain(user));
+  }
+
+  public async filter(req:Request, res:Response): Promise<Response> {
+    console.log("Estou no filter")
+    const data = await FilterUserValidator.parseAsync(req.query).catch((err) => {
+      throw new AppError(parseZodValidationError(err), StatusCodes.BAD_REQUEST);
+    });
+    
+    const filterUsers = AppContainer.resolve<FilterUserService>(FilterUserService);
+    const user = await filterUsers.execute({ data });
+
+    return res.status(200).json(user);
   }
 
   public async list(req: Request, res: Response): Promise<Response> {
