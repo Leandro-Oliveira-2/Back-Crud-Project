@@ -10,6 +10,6 @@ userRouter.get('/:id', [AuthMiddleware.required], userController.find);
 userRouter.delete('/:id', [AuthMiddleware.required], userController.delete);
 userRouter.get('/', [AuthMiddleware.required], userController.list);
 userRouter.patch('/:userId', [AuthMiddleware.required], userController.update);
-userRouter.post('/filterByName', userController.filter);
+userRouter.post('/filterByName',  [AuthMiddleware.required],userController.filter);
 
 export default userRouter;

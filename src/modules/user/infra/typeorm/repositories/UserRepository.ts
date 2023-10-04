@@ -33,6 +33,7 @@ class UserRepository implements IUserRepository {
 
   filterByName(name: String): Promise<User[]>{
     return this.ormRepository.createQueryBuilder('user')
+      .leftJoinAndSelect('user.transations', 'transations')
       .where('user.name LIKE :name', { name: `%${name}%` })
       .getMany();
   }

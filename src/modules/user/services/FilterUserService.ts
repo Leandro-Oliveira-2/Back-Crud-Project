@@ -17,7 +17,6 @@ class FilterUserService {
   @inject(Types.UserRepository) private userRepository!: IUserRepository;
 
   public async execute({ data }: IRequest) : Promise<IResponse[] | undefined>{
-    const { name } = data;
 
     try {
       const usersFound = await this.userRepository.filterByName(data.name? data.name: '');

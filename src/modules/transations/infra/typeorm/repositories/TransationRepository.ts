@@ -20,8 +20,16 @@ class TransationRepository implements ITransationRepository {
     return this.ormRepository.findOne({ where, relations });
   }
 
+  public async filterByname(name: string): Promise<Transations[]> {
+    return this.ormRepository.createQueryBuilder('transactions')
+    .leftJoinAndSelect('transactions.user', 'user')
+    .where('user.name LIKE :name', { name: `%${name}%` })
+    .getMany();
+  }
+
   public async list(where?: object | object[], relations?: string[], take?: number, skip?: number): Promise<Transations[]> {
     return this.ormRepository.find({
+      
       where, relations, take, skip,
     });
   }

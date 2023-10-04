@@ -2,7 +2,7 @@ interface IListTransatiosResponse {
     date?: Date;
     transationType?: string;
     description?: string;
-    value?: string;
+    value?: number;
     status?: string;
 }
 

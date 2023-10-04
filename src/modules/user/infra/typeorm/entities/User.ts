@@ -29,7 +29,7 @@ class User {
   @Column({ type: 'float', name: 'saldo'})
   saldo?: number;
 
- @OneToMany(() => Transations, (transation) => transation.user)
+ @OneToMany(() => Transations, (transation) => transation.user, {cascade: true})
   transations?: Transations[]; 
     
 }

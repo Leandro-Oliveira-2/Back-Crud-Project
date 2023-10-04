@@ -5,12 +5,14 @@ import parseZodValidationError from "@common/errors/ZodError";
 import AppContainer from '@common/container';
 
 import CreateTransationValidator from '@modules/transations/infra/http/validators/CreateTransationValidators'
+import FilterUserValidator from '@modules/transations/infra/http/validators/FilterTransactionValidator'
 import CreateTransationService from "@modules/transations/services/CreateTransationService";
 import DeleteUserService from "@modules/user/services/DeleteUserService";
 import DepositService from "@modules/transations/services/DepositService";
 import WithdrawMoneyService from "@modules/transations/services/WithdrawMoneyService";
 import ListTransationService from "@modules/transations/services/ListTransationService";
 import GetTransactionsUserService from "@modules/transations/services/GetTransactionsUserService";
+import FilterTransationService from "@modules/transations/services/FilterTransationService";
 
 
 class TransationController {
@@ -23,7 +25,6 @@ class TransationController {
     const data = await CreateTransationValidator.parseAsync(req.body).catch((err) => {
       throw new AppError(parseZodValidationError(err), StatusCodes.BAD_REQUEST);
     });
-    console.log("transactiontype:", data.transationType);
     const createTransation = AppContainer.resolve<CreateTransationService>(CreateTransationService);
     const transation = await createTransation.execute({ data });
 
@@ -35,10 +36,10 @@ class TransationController {
       throw new AppError("Not have Permission", 403);
     }
 
+
     const data = await CreateTransationValidator.parseAsync(req.body).catch((err) => {
       throw new AppError(parseZodValidationError(err), StatusCodes.BAD_REQUEST);
     });
-    console.log("transactiontype:", data.transationType);
     const createTransation = AppContainer.resolve<DepositService>(DepositService);
     const transation = await createTransation.execute({ data });
 
@@ -53,7 +54,6 @@ class TransationController {
     const data = await CreateTransationValidator.parseAsync(req.body).catch((err) => {
       throw new AppError(parseZodValidationError(err), StatusCodes.BAD_REQUEST);
     });
-    console.log("transactiontype:", data.transationType);
     const createTransation = AppContainer.resolve<WithdrawMoneyService>(WithdrawMoneyService);
     const transation = await createTransation.execute({ data });
 
@@ -99,6 +99,19 @@ class TransationController {
     return res.status(200).json(transations);
   }
 
+  public async filter(req:Request, res:Response): Promise<Response> {
+    if (!req.auth.id) {
+      throw new AppError("Not have Permission", 403);
+    }
+    const data = await FilterUserValidator.parseAsync(req.query).catch((err) => {
+      throw new AppError(parseZodValidationError(err), StatusCodes.BAD_REQUEST);
+    });
+
+    const filterTransations = AppContainer.resolve<FilterTransationService>(FilterTransationService);
+    const transations = await filterTransations.execute({ data });
+
+    return res.status(200).json(transations);
+  }
 
 
 }

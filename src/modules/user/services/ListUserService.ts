@@ -10,6 +10,7 @@ import IResponse from '@modules/user/responses/IListUserResponse'
 @injectable()
 class ListUserService {
 
+
   @inject(Types.UserRepository) private userRepository!: IUserRepository;
 
   public async execute(): Promise<IResponse[] | undefined> {

@@ -52,7 +52,9 @@ class UserController {
   }
 
   public async filter(req:Request, res:Response): Promise<Response> {
-    console.log("Estou no filter")
+    if (!req.auth.id) {
+      throw new AppError("Not have Permission", 403);
+    }
     const data = await FilterUserValidator.parseAsync(req.query).catch((err) => {
       throw new AppError(parseZodValidationError(err), StatusCodes.BAD_REQUEST);
     });

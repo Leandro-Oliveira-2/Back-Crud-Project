@@ -12,6 +12,6 @@ transationRouter.post('/deposit', [AuthMiddleware.required],transationController
 transationRouter.post('/saque', [AuthMiddleware.required],transationController.saque);
 transationRouter.get('/list/:id', [AuthMiddleware.required],transationController.userTransations);
 transationRouter.get('/list', [AuthMiddleware.required],transationController.list);
-
+transationRouter.post('/filterByName',[AuthMiddleware.required],transationController.filter);
 
 export default transationRouter;
