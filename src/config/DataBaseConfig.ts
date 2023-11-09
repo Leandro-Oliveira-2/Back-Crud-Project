@@ -13,7 +13,7 @@ interface IDatabaseConfig {
 
 const databaseConfig: IDatabaseConfig = {
   type: 'postgres',
-  host: process.env.DATABASE_HOST || 'viaduto.proxy.rlwy.net',
+  host: process.env.DATABASE_HOST || 'viaduct.proxy.rlwy.net',
   username: process.env.DATABASE_USER || 'postgres',
   password: process.env.DATABASE_PASSWORD || 'bcD6D5-E2Acd*g6*-GCBadbGaDgDdCca',
   database: process.env.DATABASE_DATABASE || 'railway',
