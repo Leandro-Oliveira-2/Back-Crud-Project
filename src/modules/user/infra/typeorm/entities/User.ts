@@ -12,7 +12,7 @@ class User {
   @Column({ type: 'varchar', name: 'name', length: 64})
   name?: string;
 
-  @Exclude()
+
   @Column({ type: 'varchar', name: 'gender', length: 10})
   gender?: string;
 
