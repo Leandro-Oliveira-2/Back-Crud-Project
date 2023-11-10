@@ -9,6 +9,7 @@ interface IUpdateUserDTO {
     dia?: number;
     data?: Date ;
   };
+  enabled?: boolean;
 }
 
 export default IUpdateUserDTO;

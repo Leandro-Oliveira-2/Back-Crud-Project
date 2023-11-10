@@ -12,6 +12,7 @@ const schema = Z.object({
     dia: Z.number().optional(),
     data: Z.date().optional(),
   }),
+  enabled: Z.boolean().optional(),
 });
 
 export default schema;

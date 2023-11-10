@@ -9,7 +9,7 @@ const schema = Z.object({
   saldo: Z.number().optional(),
   fidelidade: Z.object({
     dia: Z.number().optional(),
-    data: Z.string().optional(),
+    data: Z.date().optional(),
   }).optional(),
 });
 

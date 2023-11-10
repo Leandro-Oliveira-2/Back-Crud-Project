@@ -10,6 +10,7 @@ interface ICreateUserDTO {
     dia?: number;
     data?: Date;
   };
+  enabled?: boolean;
 }
 
 export default ICreateUserDTO;

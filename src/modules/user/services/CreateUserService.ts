@@ -30,6 +30,7 @@ class CreateUserService {
         dia: data.fidelidade.dia,
         data: new Date(),
       },
+      enabled : true,
       passwordHash: await argon2.hash(data.secret)
     }
     const userCreated = await this.userRepository.create(user);

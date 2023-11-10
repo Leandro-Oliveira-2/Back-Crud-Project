@@ -34,6 +34,9 @@ class User {
   @Column({ type: 'float', name: 'saldo'})
   saldo?: number;
 
+  @Column({ type: 'boolean', name: 'enabled', default: true }) 
+  enabled?: boolean;
+
  @OneToMany(() => Transations, (transation) => transation.user, {cascade: true})
   transations?: Transations[]; 
 

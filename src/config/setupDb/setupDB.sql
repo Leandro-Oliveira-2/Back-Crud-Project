@@ -7,7 +7,7 @@ CREATE TABLE "user" (
     "phone" character varying(15) NOT NULL,
     "passwordHash" character varying(1024) NOT NULL,
     "saldo" double precision NOT NULL,
-    "fidelidade" jsonb DEFAULT '{"dia": 0, "datd
+    "fidelidade" jsonb DEFAULT '{"dia": 0, "data": 0}',
     CONSTRAINT "UQ_e12875dfb3b1d92d7d7c5377e22" UNIQUE ("email"),
     CONSTRAINT "PK_cace4a159ff9f2512dd42373760" PRIMARY KEY ("id")
 );
