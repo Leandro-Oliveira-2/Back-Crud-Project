@@ -35,10 +35,10 @@ class User {
   @Column({ type: 'float', name: 'saldo'})
   saldo?: number;
 
- @OneToMany(() => Transations, (transation) => transation.user, {cascade: true})
+ @OneToMany(() => Transations, (transation) => transation.user)
   transations?: Transations[]; 
 
-  @OneToMany(() => Transations, (transation) => transation.recepter, {cascade: true})
+  @OneToMany(() => Transations, (transation) => transation.recepter)
   receivedTransfers?: Transations[]; 
     
 }
