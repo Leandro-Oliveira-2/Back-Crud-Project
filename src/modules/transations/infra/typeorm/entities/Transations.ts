@@ -28,13 +28,12 @@ class Transations {
     @Column({ type: 'varchar', name: 'status', length: 64 })
     status?: string;
 
-    @ManyToOne(() => User, (user) => user.transations, { onDelete: 'CASCADE' })
+    @ManyToOne(() => User, (user) => user.transations)
     @JoinColumn([{ name: 'userId', referencedColumnName: 'id' }])
     user?: User;
-    
-    @ManyToOne(() => User, (user) => user.receivedTransfers, { onDelete: 'CASCADE' })
+
+    @ManyToOne(() => User, (user) => user.transations)
     @JoinColumn([{ name: 'recepterId', referencedColumnName: 'id' }])
     recepter?: User;
-    
 }
 export default Transations
