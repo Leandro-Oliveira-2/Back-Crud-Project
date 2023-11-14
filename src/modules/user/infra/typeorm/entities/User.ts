@@ -21,7 +21,7 @@ class User {
   @Column({ type: 'varchar', name: 'adress', length: 128})
   adress?: string;
 
-  @Column({ type: 'jsonb', name: 'fidelidade', default: { dia: 0, data: 0 } })
+  @Column({ type: 'jsonb', name: 'fidelidade', default: { dia: 0, data: new Date(), quantityRewards: 0, rewardDates: [] } })
   fidelidade?: JsonObject;
 
   @Column({ type: 'varchar', name: 'phone', length: 15})

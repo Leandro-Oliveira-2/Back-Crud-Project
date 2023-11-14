@@ -9,6 +9,8 @@ interface ICreateUserDTO {
   fidelidade?: {
     dia?: number;
     data?: Date;
+    quantityRewards?: number;
+    rewardDates?: Date[];
   };
   enabled?: boolean;
 }
