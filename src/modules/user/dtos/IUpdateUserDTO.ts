@@ -7,7 +7,9 @@ interface IUpdateUserDTO {
   saldo?: number;
   fidelidade?: {
     dia?: number;
-    data?: Date ;
+    data?: string | Date;
+    quantityRewards?: number;
+    rewardDates?: string[] | Date[];
   };
   enabled?: boolean;
 }
