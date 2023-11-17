@@ -10,6 +10,8 @@ const schema = Z.object({
   fidelidade: Z.object({
     dia: Z.number().optional(),
     data: Z.string().optional(),
+    quantityRewards: Z.number().optional(),
+    rewardDates: Z.array(Z.string()).optional(),
   }).optional(),
 });
 

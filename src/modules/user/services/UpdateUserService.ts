@@ -20,7 +20,7 @@ class UpdateUserService {
   @inject(Types.UserRepository) private userRepository!: IUserRepository;
 
   public async execute({ userId, data }: IRequest) {
-  
+
 
     const user = await this.userRepository.find({ id: userId });
     if (!user) {
@@ -29,7 +29,7 @@ class UpdateUserService {
 
     if (data.fidelidade) {
       // Atualize o objeto "fidelidade" no usuário
-        data.fidelidade.data = new Date();
+      data.fidelidade.data = new Date();
     }
 
     return this.userRepository.update(user, data);
