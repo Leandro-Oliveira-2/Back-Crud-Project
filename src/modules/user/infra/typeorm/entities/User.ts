@@ -24,6 +24,9 @@ class User {
   @Column({ type: 'jsonb', name: 'fidelidade', default: { dia: 0, data: new Date(), quantityRewards: 0, rewardDates: [] } })
   fidelidade?: JsonObject;
 
+  @Column({ type: 'jsonb', name: 'saldoHistory', default:{ datas: [], values: [] } })
+  saldoHistory?: JsonObject; 
+
   @Column({ type: 'varchar', name: 'phone', length: 15})
   phone?: string; 
 
